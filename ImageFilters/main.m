@@ -1,4 +1,4 @@
-//
+
 //  main.m
 //  ImageFilters
 //
@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
+#import "CoreImageRecipes.h"
 
 int main(int argc, char * argv[]) {
+    
+    functionCall();
+    
     @autoreleasepool {
         return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
     }

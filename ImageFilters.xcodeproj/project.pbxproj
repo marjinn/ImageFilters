@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		15B6FC0319E9794100D27F0B /* CoreImageRecipes.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B6FC0219E9794100D27F0B /* CoreImageRecipes.m */; };
+		15C652FD19E9C53D00262956 /* CITipsAndTryOuts.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C652FC19E9C53D00262956 /* CITipsAndTryOuts.m */; };
+		15C652FF19E9CEC500262956 /* arrow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 15C652FE19E9CEC500262956 /* arrow.jpg */; };
 		15D1CAA219E97179008E3524 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D1CAA119E97179008E3524 /* main.m */; };
 		15D1CAA519E97179008E3524 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D1CAA419E97179008E3524 /* AppDelegate.m */; };
 		15D1CAA819E97179008E3524 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D1CAA719E97179008E3524 /* ViewController.m */; };
@@ -27,6 +30,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		15B6FC0119E9794100D27F0B /* CoreImageRecipes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreImageRecipes.h; sourceTree = "<group>"; };
+		15B6FC0219E9794100D27F0B /* CoreImageRecipes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreImageRecipes.m; sourceTree = "<group>"; };
+		15C652FB19E9C53D00262956 /* CITipsAndTryOuts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CITipsAndTryOuts.h; sourceTree = "<group>"; };
+		15C652FC19E9C53D00262956 /* CITipsAndTryOuts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CITipsAndTryOuts.m; sourceTree = "<group>"; };
+		15C652FE19E9CEC500262956 /* arrow.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = arrow.jpg; sourceTree = "<group>"; };
 		15D1CA9C19E97179008E3524 /* ImageFilters.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFilters.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15D1CAA019E97179008E3524 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		15D1CAA119E97179008E3524 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -89,6 +97,10 @@
 				15D1CAAC19E97179008E3524 /* Images.xcassets */,
 				15D1CAAE19E97179008E3524 /* LaunchScreen.xib */,
 				15D1CA9F19E97179008E3524 /* Supporting Files */,
+				15B6FC0119E9794100D27F0B /* CoreImageRecipes.h */,
+				15B6FC0219E9794100D27F0B /* CoreImageRecipes.m */,
+				15C652FB19E9C53D00262956 /* CITipsAndTryOuts.h */,
+				15C652FC19E9C53D00262956 /* CITipsAndTryOuts.m */,
 			);
 			path = ImageFilters;
 			sourceTree = "<group>";
@@ -96,6 +108,7 @@
 		15D1CA9F19E97179008E3524 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				15C652FE19E9CEC500262956 /* arrow.jpg */,
 				15D1CAA019E97179008E3524 /* Info.plist */,
 				15D1CAA119E97179008E3524 /* main.m */,
 			);
@@ -200,6 +213,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				15D1CAAB19E97179008E3524 /* Main.storyboard in Resources */,
+				15C652FF19E9CEC500262956 /* arrow.jpg in Resources */,
 				15D1CAB019E97179008E3524 /* LaunchScreen.xib in Resources */,
 				15D1CAAD19E97179008E3524 /* Images.xcassets in Resources */,
 			);
@@ -219,8 +233,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15B6FC0319E9794100D27F0B /* CoreImageRecipes.m in Sources */,
 				15D1CAA819E97179008E3524 /* ViewController.m in Sources */,
 				15D1CAA519E97179008E3524 /* AppDelegate.m in Sources */,
+				15C652FD19E9C53D00262956 /* CITipsAndTryOuts.m in Sources */,
 				15D1CAA219E97179008E3524 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -414,6 +430,7 @@
 				15D1CAC119E97179008E3524 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		15D1CAC219E97179008E3524 /* Build configuration list for PBXNativeTarget "ImageFiltersTests" */ = {
 			isa = XCConfigurationList;
@@ -422,6 +439,7 @@
 				15D1CAC419E97179008E3524 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
