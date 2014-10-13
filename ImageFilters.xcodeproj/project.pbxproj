@@ -10,6 +10,8 @@
 		15B6FC0319E9794100D27F0B /* CoreImageRecipes.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B6FC0219E9794100D27F0B /* CoreImageRecipes.m */; };
 		15C652FD19E9C53D00262956 /* CITipsAndTryOuts.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C652FC19E9C53D00262956 /* CITipsAndTryOuts.m */; };
 		15C652FF19E9CEC500262956 /* arrow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 15C652FE19E9CEC500262956 /* arrow.jpg */; };
+		15C65E4919EB2F77005CF237 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C65E4719EB2F77005CF237 /* CoreImage.framework */; };
+		15C65E4A19EB2F77005CF237 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C65E4819EB2F77005CF237 /* ImageIO.framework */; };
 		15D1CAA219E97179008E3524 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D1CAA119E97179008E3524 /* main.m */; };
 		15D1CAA519E97179008E3524 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D1CAA419E97179008E3524 /* AppDelegate.m */; };
 		15D1CAA819E97179008E3524 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D1CAA719E97179008E3524 /* ViewController.m */; };
@@ -35,6 +37,8 @@
 		15C652FB19E9C53D00262956 /* CITipsAndTryOuts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CITipsAndTryOuts.h; sourceTree = "<group>"; };
 		15C652FC19E9C53D00262956 /* CITipsAndTryOuts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CITipsAndTryOuts.m; sourceTree = "<group>"; };
 		15C652FE19E9CEC500262956 /* arrow.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = arrow.jpg; sourceTree = "<group>"; };
+		15C65E4719EB2F77005CF237 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		15C65E4819EB2F77005CF237 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		15D1CA9C19E97179008E3524 /* ImageFilters.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFilters.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15D1CAA019E97179008E3524 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		15D1CAA119E97179008E3524 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -55,6 +59,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15C65E4919EB2F77005CF237 /* CoreImage.framework in Frameworks */,
+				15C65E4A19EB2F77005CF237 /* ImageIO.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +77,8 @@
 		15D1CA9319E97179008E3524 = {
 			isa = PBXGroup;
 			children = (
+				15C65E4719EB2F77005CF237 /* CoreImage.framework */,
+				15C65E4819EB2F77005CF237 /* ImageIO.framework */,
 				15D1CA9E19E97179008E3524 /* ImageFilters */,
 				15D1CAB819E97179008E3524 /* ImageFiltersTests */,
 				15D1CA9D19E97179008E3524 /* Products */,
@@ -315,7 +323,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
