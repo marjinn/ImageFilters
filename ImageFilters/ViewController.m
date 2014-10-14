@@ -20,6 +20,130 @@
 
 @implementation ViewController
 
+-(void)saveAnImageToPhone:(CIImage*) image
+{
+    __block PHAssetChangeRequest* createAssetRequest = nil;
+    [[PHPhotoLibrary sharedPhotoLibrary] performChanges:
+     ^{
+         createAssetRequest =
+         [PHAssetChangeRequest creationRequestForAssetFromImage:[UIImage imageWithCIImage:image]];
+         
+         PHFetchResult* albumFetch = nil;
+         albumFetch =
+         [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil] ;
+         
+         NSArray* arrayOfAlbums = nil;
+         arrayOfAlbums =
+         [(PHFetchResult*)albumFetch objectsAtIndexes:
+          (NSIndexSet *)[NSIndexSet indexSetWithIndexesInRange:
+                         (NSRange)
+                         (( NSRange (*) (NSUInteger,NSUInteger))NSMakeRange)(0, [albumFetch count])]];
+         
+         NSMutableDictionary* dictOfAlbumTypes = nil;
+         dictOfAlbumTypes = [[NSMutableDictionary alloc] initWithCapacity:[arrayOfAlbums count]];
+         
+         /* can do this with PHFetchResult as well */
+         for (PHAssetCollection* assetCollection in arrayOfAlbums)
+         {
+             switch ([assetCollection assetCollectionSubtype])
+             {
+                     
+                 case PHAssetCollectionSubtypeAlbumRegular:
+                     dictOfAlbumTypes[@"PHAssetCollectionSubtypeAlbumRegular"] = assetCollection;
+                     break;
+                     
+                 case PHAssetCollectionSubtypeAlbumSyncedEvent:
+                     dictOfAlbumTypes[@"PHAssetCollectionSubtypeAlbumSyncedEvent"] = assetCollection;
+                     break;
+                     
+                 case PHAssetCollectionSubtypeAlbumSyncedFaces:
+                     dictOfAlbumTypes[@"PHAssetCollectionSubtypeAlbumSyncedFaces"] = assetCollection;
+                     break;
+                     
+                 case PHAssetCollectionSubtypeAlbumSyncedAlbum:
+                     dictOfAlbumTypes[@"PHAssetCollectionSubtypeAlbumSyncedAlbum"] = assetCollection;
+                     break;
+                     
+                 case PHAssetCollectionSubtypeAlbumImported:
+                     dictOfAlbumTypes[@"PHAssetCollectionSubtypeAlbumImported"] = assetCollection;
+                     break;
+                     
+                 case PHAssetCollectionSubtypeAlbumCloudShared:
+                     dictOfAlbumTypes[@"PHAssetCollectionSubtypeAlbumCloudShared"] = assetCollection;
+                     break;
+                     
+                 case PHAssetCollectionSubtypeSmartAlbumGeneric:
+                     dictOfAlbumTypes[@"PHAssetCollectionSubtypeSmartAlbumGeneric"] = assetCollection;
+                     break;
+                     
+                 case PHAssetCollectionSubtypeSmartAlbumPanoramas:
+                     dictOfAlbumTypes[@"PHAssetCollectionSubtypeSmartAlbumPanoramas"] = assetCollection;
+                     break;
+                     
+                 case PHAssetCollectionSubtypeSmartAlbumVideos:
+                     dictOfAlbumTypes[@"PHAssetCollectionSubtypeSmartAlbumVideos"] = assetCollection;
+                     break;
+                     
+                 case PHAssetCollectionSubtypeSmartAlbumFavorites:
+                     dictOfAlbumTypes[@"PHAssetCollectionSubtypeSmartAlbumFavorites"] = assetCollection;
+                     break;
+                     
+                 case PHAssetCollectionSubtypeSmartAlbumTimelapses:
+                     dictOfAlbumTypes[@"PHAssetCollectionSubtypeSmartAlbumTimelapses"] = assetCollection;
+                     break;
+                     
+                 case PHAssetCollectionSubtypeSmartAlbumAllHidden:
+                     dictOfAlbumTypes[@"PHAssetCollectionSubtypeSmartAlbumAllHidden"] = assetCollection;
+                     break;
+                     
+                 case PHAssetCollectionSubtypeSmartAlbumRecentlyAdded:
+                     dictOfAlbumTypes[@"PHAssetCollectionSubtypeSmartAlbumRecentlyAdded"] = assetCollection;
+                     break;
+                     
+                 case PHAssetCollectionSubtypeSmartAlbumBursts:
+                     dictOfAlbumTypes[@"PHAssetCollectionSubtypeSmartAlbumBursts"] = assetCollection;
+                     break;
+                     
+                 case PHAssetCollectionSubtypeSmartAlbumSlomoVideos:
+                     dictOfAlbumTypes[@"PHAssetCollectionSubtypeSmartAlbumSlomoVideos"] = assetCollection;
+                     break;
+                     
+                 case PHAssetCollectionSubtypeAny:
+                 default:
+                     dictOfAlbumTypes[@"PHAssetCollectionSubtypeAny"] = assetCollection;
+                     break;
+                     
+             }
+             
+             
+             NSLog(@"album Sub type -> %ld",(long)[assetCollection assetCollectionSubtype]);
+             
+             
+         }
+         
+         
+         NSLog(@"dictOfAlbumTypes -> %@",dictOfAlbumTypes);
+         
+        
+         PHAssetCollectionChangeRequest* assetCollectionChangeRequest = nil;
+         assetCollectionChangeRequest =
+         [PHAssetCollectionChangeRequest changeRequestForAssetCollection:
+          (PHAssetCollection *)dictOfAlbumTypes[@"PHAssetCollectionSubtypeSmartAlbumRecentlyAdded"]];
+         
+         [assetCollectionChangeRequest addAssets:
+          (id<NSFastEnumeration>)@[[createAssetRequest placeholderForCreatedAsset]]];
+         
+     }
+                                      completionHandler:
+     ^(BOOL success, NSError *error)
+    {
+        NSLog(@"save error %@" ,error);
+    }
+     ];
+}
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
@@ -79,6 +203,15 @@
 //    }
 //     ];
     
+    
+    /*
+     There is no need for 2 perform changes 
+     all changes including creation editing
+     can be done in one
+     */
+    
+    [self saveAnImageToPhone:outputImage];
+    
     __block PHAssetChangeRequest* createAssetRequest = nil;
     [[PHPhotoLibrary sharedPhotoLibrary] performChanges:
      ^{
@@ -92,13 +225,111 @@
         
         
         [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
-            PHAssetCollection* assetCollection = nil;
-            assetCollection = (PHAssetCollection*)
-            [[PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil] lastObject];
             
+            PHFetchResult* albumFetch = nil;
+            albumFetch =
+            [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil] ;
+            
+//            PHAssetCollection* assetCollection = nil;
+//            assetCollection = (PHAssetCollection*)[albumFetch lastObject];
+            
+            NSArray* arrayOfAlbums = nil;
+            arrayOfAlbums =
+            [(PHFetchResult*)albumFetch objectsAtIndexes:
+             (NSIndexSet *)[NSIndexSet indexSetWithIndexesInRange:
+                            (NSRange)
+                            (( NSRange (*) (NSUInteger,NSUInteger))NSMakeRange)(0, [albumFetch count])]];
+            
+            NSMutableDictionary* dictOfAlbumTypes = nil;
+            dictOfAlbumTypes = [[NSMutableDictionary alloc] initWithCapacity:[arrayOfAlbums count]];
+            
+             for (PHAssetCollection* assetCollection in arrayOfAlbums)
+             {
+                 switch ([assetCollection assetCollectionSubtype])
+                 {
+        
+                     case PHAssetCollectionSubtypeAlbumRegular:
+                         dictOfAlbumTypes[@"PHAssetCollectionSubtypeAlbumRegular"] = assetCollection;
+                         break;
+                         
+                     case PHAssetCollectionSubtypeAlbumSyncedEvent:
+                         dictOfAlbumTypes[@"PHAssetCollectionSubtypeAlbumSyncedEvent"] = assetCollection;
+                         break;
+                         
+                     case PHAssetCollectionSubtypeAlbumSyncedFaces:
+                         dictOfAlbumTypes[@"PHAssetCollectionSubtypeAlbumSyncedFaces"] = assetCollection;
+                         break;
+                         
+                     case PHAssetCollectionSubtypeAlbumSyncedAlbum:
+                         dictOfAlbumTypes[@"PHAssetCollectionSubtypeAlbumSyncedAlbum"] = assetCollection;
+                         break;
+                         
+                     case PHAssetCollectionSubtypeAlbumImported:
+                         dictOfAlbumTypes[@"PHAssetCollectionSubtypeAlbumImported"] = assetCollection;
+                         break;
+                         
+                     case PHAssetCollectionSubtypeAlbumCloudShared:
+                         dictOfAlbumTypes[@"PHAssetCollectionSubtypeAlbumCloudShared"] = assetCollection;
+                         break;
+                         
+                     case PHAssetCollectionSubtypeSmartAlbumGeneric:
+                         dictOfAlbumTypes[@"PHAssetCollectionSubtypeSmartAlbumGeneric"] = assetCollection;
+                         break;
+                         
+                     case PHAssetCollectionSubtypeSmartAlbumPanoramas:
+                         dictOfAlbumTypes[@"PHAssetCollectionSubtypeSmartAlbumPanoramas"] = assetCollection;
+                         break;
+                         
+                     case PHAssetCollectionSubtypeSmartAlbumVideos:
+                         dictOfAlbumTypes[@"PHAssetCollectionSubtypeSmartAlbumVideos"] = assetCollection;
+                         break;
+                         
+                     case PHAssetCollectionSubtypeSmartAlbumFavorites:
+                         dictOfAlbumTypes[@"PHAssetCollectionSubtypeSmartAlbumFavorites"] = assetCollection;
+                         break;
+                         
+                     case PHAssetCollectionSubtypeSmartAlbumTimelapses:
+                         dictOfAlbumTypes[@"PHAssetCollectionSubtypeSmartAlbumTimelapses"] = assetCollection;
+                         break;
+                         
+                     case PHAssetCollectionSubtypeSmartAlbumAllHidden:
+                         dictOfAlbumTypes[@"PHAssetCollectionSubtypeSmartAlbumAllHidden"] = assetCollection;
+                         break;
+                         
+                     case PHAssetCollectionSubtypeSmartAlbumRecentlyAdded:
+                         dictOfAlbumTypes[@"PHAssetCollectionSubtypeSmartAlbumRecentlyAdded"] = assetCollection;
+                         break;
+                         
+                     case PHAssetCollectionSubtypeSmartAlbumBursts:
+                         dictOfAlbumTypes[@"PHAssetCollectionSubtypeSmartAlbumBursts"] = assetCollection;
+                         break;
+                         
+                     case PHAssetCollectionSubtypeSmartAlbumSlomoVideos:
+                         dictOfAlbumTypes[@"PHAssetCollectionSubtypeSmartAlbumSlomoVideos"] = assetCollection;
+                         break;
+                         
+                     case PHAssetCollectionSubtypeAny:
+                     default:
+                         dictOfAlbumTypes[@"PHAssetCollectionSubtypeAny"] = assetCollection;
+                         break;
+                         
+                 }
+
+                
+                 NSLog(@"album Sub type -> %ld",(long)[assetCollection assetCollectionSubtype]);
+                 
+                 
+            }
+            
+           
+            NSLog(@"dictOfAlbumTypes -> %@",dictOfAlbumTypes);
+            
+            
+        
             PHAssetCollectionChangeRequest* assetCollectionChangeRequest = nil;
             assetCollectionChangeRequest =
-            [PHAssetCollectionChangeRequest changeRequestForAssetCollection:(PHAssetCollection *)assetCollection];
+            [PHAssetCollectionChangeRequest changeRequestForAssetCollection:
+             (PHAssetCollection *)dictOfAlbumTypes[@"PHAssetCollectionSubtypeSmartAlbumRecentlyAdded"]];
             
             [assetCollectionChangeRequest addAssets:
              (id<NSFastEnumeration>)@[[createAssetRequest placeholderForCreatedAsset]]];
