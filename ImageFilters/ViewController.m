@@ -690,4 +690,41 @@ void getallDataFromCGImage (CGImageRef image)
     
 }
 
+#pragma mnark Filter Recipes
+
+
+
+
+
 @end
+
+@interface CIColorInvert : CIFilter
+{
+    CIImage* inputImage;
+}
+
+@property(retain,nonatomic) CIImage* inputImage;
+
+@end
+
+
+@implementation CIColorInvert
+
+@synthesize inputImage;
+
+-(CIImage*) outputImage
+{
+    return [[CIFilter filterWithName:@"CIColorMatrix"
+                      keysAndValues:
+            kCIInputImageKey, inputImage,
+            @"inputRVector",    [CIVector vectorWithX:-1.0f Y:0.0f Z:0.0f],
+            @"inputGVector",    [CIVector vectorWithX:0.0f Y:-1.0f Z:0.0f],
+            @"inputBVector",    [CIVector vectorWithX:0.0f Y:0.0f Z:-1.0f],
+            @"inputBiasVector", [CIVector vectorWithX:1.0f Y:1.0f Z:1.0f]
+             , nil] outputImage];
+}
+
+
+@end
+
+
